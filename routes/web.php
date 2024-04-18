@@ -24,7 +24,7 @@ Route::get('/about', function () {
 
 // Create additional Routes below
 
-Route::get('/properties', [PropertyController::class, 'index']);
+Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
 Route::get('/properties/create', [PropertyController::class, 'create'])->name('properties.create');
-Route::post('/properties', [PropertyController::class, 'store'])->name('properties.store');
+Route::post('/properties/store', [PropertyController::class, 'store'])->name('properties.store');
 Route::get('/properties/{property_id}', [PropertyController::class, 'show'])->name('properties.show');

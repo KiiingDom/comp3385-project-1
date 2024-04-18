@@ -25,7 +25,7 @@ class PropertyController extends Controller
         'photo' => 'required|image',
     ]);
 
-    $photoPath = $request->file('photo')->store('photos');
+    $photoPath = $request->file('photo')->storeAs('public/property_pictures', $request->file('photo')->hashName());
 
     $property = new Property();
     $property->title = $validatedData['title'];
@@ -35,7 +35,7 @@ class PropertyController extends Controller
     $property->price = $validatedData['price'];
     $property->type = $validatedData['type'];
     $property->description = $validatedData['description'];
-    $property->photo_filename = $photoPath;
+    $property->photo_filename = str_replace('public/', '', $photoPath); // Remove 'public/' from the path
     $property->save();
 
     return redirect()->route('properties.index')->with('success', 'Property added successfully');
